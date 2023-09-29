@@ -1,4 +1,5 @@
 require("fix-esm").register();
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -10,6 +11,8 @@ app.use(cors());
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { JWT } = require("google-auth-library");
+
+console.log(process.env.CLIENT_EMAIL, process.env.PRIVATE_KEY);
 
 const serviceAccountAuth = new JWT({
   email: process.env.CLIENT_EMAIL,
