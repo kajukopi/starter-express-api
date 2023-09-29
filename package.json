@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "env-cmd nodemon index.js",
-    "repl": "env-cmd node",
-    "start": "nodemon index.js -e js"
+    "repl": "env-cmd node"
   },
   "repository": {
     "type": "git",
