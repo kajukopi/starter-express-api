@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js -e js",
     "dev": "env-cmd nodemon index.js",
-    "repl": "env-cmd node"
+    "repl": "env-cmd node",
+    "start": "nodemon index.js -e js"
   },
   "repository": {
     "type": "git",
