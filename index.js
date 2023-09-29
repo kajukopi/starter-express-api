@@ -1,5 +1,5 @@
 require("fix-esm").register();
-
+require('dot-env')
 const express = require("express");
 const app = express();
 const cors = require("cors");
