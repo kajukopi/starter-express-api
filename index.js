@@ -17,10 +17,9 @@ const serviceAccountAuth = new JWT({
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
-const doc = new GoogleSpreadsheet('133G_c39tK39M0HdI1QwfjNNx0yB7h3ipM82c-Dn-9g4', serviceAccountAuth);
-
 app.get("/:id", async (req, res) => {
   try {
+    const doc = new GoogleSpreadsheet(process.env.SHEET_ID, serviceAccountAuth);
     const { id } = req.params;
     await doc.loadInfo();
     const sheet = doc.sheetsByTitle["query"];
