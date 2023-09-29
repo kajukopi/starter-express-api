@@ -29,7 +29,7 @@ app.get("/:id", async (req, res) => {
     await sheet.loadCells("A1:Z10");
     const a2 = sheet.getCellByA1("A2");
     const query = `SELECT * WHERE A LIKE '${id}%' OR B LIKE '${id}%'  ORDER BY A`;
-    const rumus = `=QUERY(assets!A2:F,"${query}")`;
+    const rumus = `=QUERY(assets!A2:C,"${query}")`;
     a2.formula = rumus;
     await sheet.saveUpdatedCells();
     const rows = await sheet.getRows();
