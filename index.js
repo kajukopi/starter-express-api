@@ -6,7 +6,7 @@ const app = express();
 const cors = require("cors");
 
 // app.use(express.static);
-// app.use(express.json());
+app.use(express.json());
 
 app.use(cors());
 
@@ -43,6 +43,16 @@ app.get("/:id", async (req, res) => {
     console.log(error);
     res.json({ status: false, data: error });
   }
+});
+
+app.post("/:uid", async (req, res) => {
+  const uid = req.params.uid;
+  const body = req.body;
+  if (!uid) return res.json({ status: false });
+  await doc.loadInfo();
+  const sheet = doc.sheetsByTitle["contact"];
+  const data = await sheet.addRow(body);
+  res.json({ status: true });
 });
 
 const port = process.env.port || 3000;
