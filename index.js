@@ -42,21 +42,21 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const email = "user@example.xyz";
-const password = "password123";
+// const email = "user@example.xyz";
+// const password = "password123";
 
-admin
-  .auth()
-  .createUser({
-    email: email,
-    password: password,
-  })
-  .then((userRecord) => {
-    console.log("Successfully created new user:", userRecord.uid);
-  })
-  .catch((error) => {
-    console.error("Error creating new user:", error);
-  });
+// admin
+//   .auth()
+//   .createUser({
+//     email: email,
+//     password: password,
+//   })
+//   .then((userRecord) => {
+//     console.log("Successfully created new user:", userRecord.uid);
+//   })
+//   .catch((error) => {
+//     console.error("Error creating new user:", error);
+//   });
 
 app.get("/:id", async (req, res) => {
   try {
