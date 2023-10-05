@@ -39,6 +39,7 @@ app.get("/:id", async (req, res) => {
     const data = [rows.at(-1)._worksheet._headerValues, filtered];
     res.json({ status: true, data, length: rows.length });
   } catch (error) {
+    console.log(error);
     res.json({ status: false, data: error });
   }
 });
@@ -48,7 +49,7 @@ app.post("/:uid", async (req, res) => {
     const { uid } = req.params;
     const body = req.body;
     await doc.loadInfo();
-    const sheet = doc.sheetsByTitle["building"];
+    const sheet = doc.sheetsByTitle["buildings"];
     const add = await sheet.addRow(body);
     res.json({ status: true });
   } catch (error) {
