@@ -14,20 +14,35 @@ const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { JWT } = require("google-auth-library");
 
 const serviceAccountAuth = new JWT({
-  keyFile: "./keyFile.json",
+  email: process.env.FIREBASE_CLIENT_EMAIL,
+  key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
-const doc = new GoogleSpreadsheet("1gNmIDpeme1zkAx6X1pFgPbmi-KZqmMIezEbdYPEqrYQ", serviceAccountAuth);
+const doc = new GoogleSpreadsheet("1j_nmnZWGRDqX8NYBDuJfzTHRRqDcz2C2KGLMjHWhgPY", serviceAccountAuth);
+console.log(process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n").length);
+// Initialize Firebase Admin SDK with environment variables
+const serviceAccount = {
+  type: process.env.FIREBASE_TYPE,
+  project_id: process.env.FIREBASE_PROJECT_ID,
+  private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+  private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"), // Restore newline characters
+  client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  client_id: process.env.FIREBASE_CLIENT_ID,
+  auth_uri: process.env.FIREBASE_AUTH_URI,
+  token_uri: process.env.FIREBASE_TOKEN_URI,
+  auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+  client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
+};
 
 const admin = require("firebase-admin");
-const serviceAccount = require("./serviceAccount.json");
+// const serviceAccount = require("./serviceAccount.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-const email = "user@example.com";
+const email = "user@example.xyz";
 const password = "password123";
 
 admin
@@ -42,7 +57,6 @@ admin
   .catch((error) => {
     console.error("Error creating new user:", error);
   });
-  
 
 app.get("/:id", async (req, res) => {
   try {
