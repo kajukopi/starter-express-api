@@ -20,6 +20,30 @@ const serviceAccountAuth = new JWT({
 
 const doc = new GoogleSpreadsheet("1gNmIDpeme1zkAx6X1pFgPbmi-KZqmMIezEbdYPEqrYQ", serviceAccountAuth);
 
+const admin = require("firebase-admin");
+const serviceAccount = require("./serviceAccount.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const email = "user@example.com";
+const password = "password123";
+
+admin
+  .auth()
+  .createUser({
+    email: email,
+    password: password,
+  })
+  .then((userRecord) => {
+    console.log("Successfully created new user:", userRecord.uid);
+  })
+  .catch((error) => {
+    console.error("Error creating new user:", error);
+  });
+  
+
 app.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
